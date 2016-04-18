@@ -1,0 +1,29 @@
+{
+  "name": "big-n",
+  "version": "0.0.1",
+  "description": "simple librery to make big number operation",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cereceres/bigN.git"
+  },
+  "keywords": [
+    "number",
+    "big",
+    "add",
+    "sum",
+    "rest",
+    "minus",
+    "multiply",
+    "divition"
+  ],
+  "author": "Jesus Cereceres",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Cereceres/bigN/issues"
+  },
+  "homepage": "https://github.com/Cereceres/bigN#readme"
+}
