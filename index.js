@@ -55,7 +55,6 @@ class bigN {
     let res = [ ],
       _res,
       a, b, c
-    console.log( 'number', this.number, 'num', num );
     for ( var i = 1; i <= this.number.length; i++ ) {
       _res = 0
 
@@ -63,7 +62,6 @@ class bigN {
       for ( var j = 1; j <= num.length; j++ ) {
         b = +( num[ num.length - j ] ? num[ num.length - j ] : 0 )
         c = ( i === 1 ) ? 0 : +( res[ max - j - i + 1 ] ) || 0
-        console.log( 'a0', a, 'b', b, 'c', c, '_res', _res );
         res[ max - j - i + 1 ] = a * b + _res + c
         if ( res[ max - j - i + 1 ] > 9 && j !== num.length ) {
           _res = Math.floor( res[ max - j - i + 1 ] / 10 )
@@ -79,12 +77,10 @@ class bigN {
       }
     }
     this.decimal = numDecimal
-    console.log( 'res al final de multiply', res.slice );
-    this.number = res.slice( res.toString( ).search( /0(?=[^0])/ ) + 1 )
-      ( this.number[ 0 ] === undefined ) &&
-      ( this.number = this.number.slice( 1 ) )
-    console.log( 'this.number==', this.number );
-
+    let str = res.toString( )
+    this.number = res.slice( str.search( /0(?=[^0])/ ) + 1 );
+    ( this.number[ 0 ] === undefined ) &&
+    ( this.number = this.number.slice( 1 ) )
     return this
   }
   rest( number ) {
@@ -134,35 +130,23 @@ class bigN {
     dif = dif < 0 ? 0 : dif
     let res = [ ],
       a, b, _res
-    numDecimal = numDecimal || this.decimal
+    numDecimal = ( numDecimal || this.decimal ) + this.decimal - decimal.length
+    let n = numDecimal + dif
     console.log( 'this.number', this.number, 'num.join', num );
     a = +( this.number.slice( 0, ( dif = 0 ) ? max : min ).join( '' ) )
     b = +( num.join( '' ) )
     console.log( 'a=', a, 'b=', b );
-    for ( var i = 0; i <= dif; i++ ) {
+    for ( var i = 0; i <= n; i++ ) {
       res[ i ] = Math.floor( a / b )
       _res = a - b * res[ i ]
-      console.log(
-        'this.number[ i + min ] === undefined ? 0 : this.number[ i + min ]',
-        this.number[ i + min ] === undefined ?
-        0 : this.number[ i + min ] );
+      console.log( 'res', res, '_res', _res );
       a = +( _res.toString( ).concat( this.number[ i + min ] === undefined ?
         0 : this.number[ i + min ] ) )
       console.log( 'a=', a, 'b=', b, '_res', _res, 'rss', res );
     }
     this.number = res
-    res = [ ]
-    for ( i = 0; i <= numDecimal; i++ ) {
-      res[ i ] = Math.floor( a / b )
-      _res = a - b * res[ i ]
-      a = +( _res.toString( ).concat( this.number[ i + max ] ||
-        0 ) )
-    }
-    res = res.slice( res.toString( ).search( /0(?=[^0])/ ) + 1 )
-    console.log( 'res=', res );
-    this.number = this.number.concat( res )
     this.number = this.number.slice( this.number.toString( ).search(
-      /0(?=[^0])/ ) + 1 )
+      /0(?=[0]*)/ ) + 1 )
     this.decimal = numDecimal
     return this
   }

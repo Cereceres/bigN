@@ -12,13 +12,13 @@ describe( 'Test for routines ob bigN', function ( ) {
   } );
 
   it( 'the multiply test with', function ( ) {
-    console.log( 'multiply', num.number );
-    assert.equal( num.multiply( '123.23' ).toString( ), '2863.125820' );
+    assert.equal( new bigN( '1.6' ).multiply( '1.2' ).toString( ),
+      '1.92' );
   } );
 
   it( 'the divition test with', function ( ) {
     console.log( 'divition', num.number );
-    assert.equal( num.div( '123.23' ).toString( ), '23.233952' );
+    assert.equal( new bigN( '1.6' ).div( '2' ).toString( ), '0.8' );
   } );
 
   it( 'the divition test with', function ( ) {
