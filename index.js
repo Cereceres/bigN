@@ -5,7 +5,7 @@ class bigN {
     let decimal = [ ]
     this.number = number.toString().split('.')
     this.number[ 1 ] && (decimal = this.number[ 1 ].split(''))
-    this.decimal = numDecimal ? numDecimal : decimal.length
+    this.decimal = numDecimal || decimal.length
     this.number = this.number[ 0 ].split('')
     this.number = this.number.concat(decimal)
   }
@@ -19,19 +19,13 @@ class bigN {
     let _res = 0,
       res = [ ]
     let numDecimal = decimal.length > this.decimal ? decimal.length : this.decimal
-    let max = numDecimal +
-      ((num.length - decimal.length) > (this.number.length - this.decimal) ?
-        num.length - decimal.length :
-        this.number.length - this.decimal)
+    let max = numDecimal + ((num.length - decimal.length) > (this.number.length - this.decimal)
+    ? num.length - decimal.length : this.number.length - this.decimal)
     let numMax = this.number.length - this.decimal + numDecimal
-    let numMax_2 = num.length - decimal.length + numDecimal
+    let numMax2 = num.length - decimal.length + numDecimal
     for (let i = 1; i <= max; i++) {
-      a = this.number[ numMax - i ] !== undefined ? +(this.number[
-        numMax - i ]) : 0
-      b = num[ numMax_2 - i ] !== undefined ?
-        +(
-          num[ numMax_2 - i ]) :
-        0
+      a = this.number[ numMax - i ] !== undefined ? +(this.number[ numMax - i ]) : 0
+      b = num[ numMax2 - i ] !== undefined ? +(num[ numMax2 - i ]) : 0
       res[ max - i ] = a + b + _res
       if (res[ max - i ] > 9) {
         _res = 1
@@ -42,7 +36,8 @@ class bigN {
     }
     this.decimal = numDecimal
     this.number = res
-    this.number = this.number = this.number.slice(this.toString().search(/0(?=[^0])/))
+    console.log(this.toString(), 'this.toString()')
+    this.number = this.number.slice(this.toString().search(/0(?=[^0])/))
     return this
   }
   multiply (number) {
@@ -78,8 +73,8 @@ class bigN {
       }
     }
     this.decimal = numDecimal
-    this.number = res(this.number[ 0 ] === undefined) &&
-    (this.number = this.number.slice(1))
+    this.number = res;
+    (this.number[ 0 ] === undefined) && (this.number = this.number.slice(1))
     this.number = this.number.slice(this.toString().search(/0(?=[^0])/))
     return this
   }
@@ -92,19 +87,14 @@ class bigN {
     let a, b
     let _res = 0,
       res = [ ]
-    let numDecimal = decimal.length > this.decimal ? decimal.length :
-      this.decimal
-    let max = numDecimal +
-      ((num.length - decimal.length) > (this.number.length - this.decimal) ?
-        num.length - decimal.length :
-        this.number.length - this.decimal)
+    let numDecimal = decimal.length > this.decimal ? decimal.length : this.decimal
+    let max = numDecimal + ((num.length - decimal.length) > (this.number.length - this.decimal)
+     ? num.length - decimal.length : this.number.length - this.decimal)
     let numMax = this.number.length - this.decimal + numDecimal
-    let numMax_2 = num.length - decimal.length + numDecimal
+    let numMax2 = num.length - decimal.length + numDecimal
     for (var i = 1; i <= max; i++) {
-      a = this.number[ numMax - i ] !== undefined ? +(this.number[
-        numMax - i ]) : 0
-      b = num[ numMax_2 - i ] !== undefined ? +(num[ numMax_2 - i ]) :
-        0
+      a = this.number[ numMax - i ] !== undefined ? +(this.number[ numMax - i ]) : 0
+      b = num[ numMax2 - i ] !== undefined ? +(num[ numMax2 - i ]) : 0
       if (a >= b) {
         res[ max - i ] = a - b - _res
         _res = 0
@@ -131,25 +121,19 @@ class bigN {
     dif = dif < 0 ? 0 : dif
     let res = [ ],
       a, b, _res
-    numDecimal = numDecimal || this.decimal
-    let n = numDecimal + dif - this.decimal + decimal.length
-    console.log('this.number', this.number, 'num.join', num, 'n===>>', n)
+    !numDecimal && (numDecimal = (numDecimal || this.decimal))
+    let n = (numDecimal || this.decimal) - this.decimal + decimal.length + dif
     a = +(this.number.slice(0, (dif = 0) ? max : min).join(''))
     b = +(num.join(''))
-    console.log('a=', a, 'b=', b)
     for (var i = 0; i <= n; i++) {
       res[ i ] = Math.floor(a / b)
       _res = a - b * res[ i ]
-      console.log('res', res, '_res', _res)
-      a = +(_res.toString().concat(this.number[ i + min ] === undefined ?
-        0 : this.number[ i + min ]))
-      console.log('a=', a, 'b=', b, '_res', _res, 'rss', res)
-      if (!_res && ((i + min) > this.number.length)) {
-        breack
-      }
+      a = +(_res.toString().concat(this.number[ i + min ] === undefined
+        ? 0 : this.number[ i + min ]))
+      if (!_res && this.number[ i + min ] === undefined) { break }
     }
     this.number = res
-    this.number = this.number.slice(this.toString().search(/0(?=[^0])/))
+    this.number = this.number.slice(this.number.toString().search(/0(?=[^0])/))
     this.decimal = numDecimal
     return this
   }
