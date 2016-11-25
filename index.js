@@ -155,7 +155,7 @@ class bigN {
    *
    */
   div (number, numDecimal) {
-    console.log('this.number', this.number, this.decimal)
+    console.log('this.number', number, this.number, this.decimal)
     let num = number.toString().split('.')
     let decimal = [ ]
     num[ 1 ] && (decimal = num[ 1 ].split(''))
@@ -169,8 +169,8 @@ class bigN {
     let res = [ ],
       a, b, _res
     numDecimal = numDecimal === undefined ? this.decimal : numDecimal
-    let n = (numDecimal || this.decimal) - this.decimal + decimal.length + dif
-    a = +(this.number.slice(0, (dif = 0) ? max : min).join(''))
+    let n = numDecimal - this.decimal + decimal.length + dif
+    a = +(this.number.slice(0, dif == 0 ? max : min).join(''))
     b = +(num.join(''))
     for (var i = 0; i <= n; i++) {
       res[ i ] = Math.floor(a / b)
@@ -179,7 +179,8 @@ class bigN {
         ? 0 : this.number[ i + min ]))
       if (!_res && this.number[ i + min ] === undefined) { break }
     }
-    this.number = res
+    console.log('res', res)
+    this.number = res.slice(0,res.length-this.decimal + decimal.length + numDecimal)
     this.decimal = numDecimal
     console.log('this.number', this.number)
     let zeros = this.number.join('').search(regex)
