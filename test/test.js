@@ -8,7 +8,7 @@ describe('Test for routines ob bigN', function () {
   })
 
   it('the rest test with', function () {
-    assert.equal(num.rest('1234.1224').toString(), '23.2340')
+    assert.equal(num.rest('1234.1224').toString(), '23.234')
   })
 
   it('the multiply test with', function () {
