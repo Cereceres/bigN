@@ -1,6 +1,6 @@
 'use strict'
-let assert = require('assert'),
-  bigN = require('../index')
+let assert = require('assert')
+let bigN = require('../index')
 describe('Test for routines of bigN', function () {
   let num = new bigN('23.234')
   it('the sum test with', function () {
